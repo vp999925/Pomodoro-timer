@@ -21,17 +21,38 @@ class PomodoroTimer {
         this.pomodoroButton = document.getElementById('pomodoro');
         this.shortBreakButton = document.getElementById('shortBreak');
         this.longBreakButton = document.getElementById('longBreak');
+        this.taskDialog = document.getElementById('task-dialog');
+        this.taskInput = document.getElementById('task-input');
+        this.taskDisplay = document.getElementById('task-display');
 
         // Event listeners
-        this.startButton.addEventListener('click', () => this.start());
+        this.startButton.addEventListener('click', () => this.showTaskDialog());
         this.pauseButton.addEventListener('click', () => this.pause());
         this.resetButton.addEventListener('click', () => this.reset());
         this.pomodoroButton.addEventListener('click', () => this.setMode('pomodoro'));
         this.shortBreakButton.addEventListener('click', () => this.setMode('shortBreak'));
         this.longBreakButton.addEventListener('click', () => this.setMode('longBreak'));
+        
+        // Task dialog form submission
+        this.taskDialog.querySelector('form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const task = this.taskInput.value.trim();
+            if (task) {
+                this.taskDisplay.textContent = `Current Focus: ${task}`;
+                this.taskDialog.close();
+                this.start();
+            }
+        });
 
         // Initialize display
         this.updateDisplay();
+    }
+
+    showTaskDialog() {
+        if (!this.isRunning) {
+            this.taskInput.value = '';
+            this.taskDialog.showModal();
+        }
     }
 
     updateDisplay() {

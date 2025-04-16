@@ -9,6 +9,7 @@
 <body>
     <div class="container">
         <h1>Pomodoro Timer</h1>
+        <div id="task-display" class="task-display"></div>
         <div class="timer">
             <span id="minutes">55</span>:<span id="seconds">00</span>
         </div>
@@ -23,6 +24,13 @@
             <button id="longBreak">Long Break</button>
         </div>
     </div>
+    <dialog id="task-dialog">
+        <form method="dialog">
+            <h2>What are you focusing on?</h2>
+            <input type="text" id="task-input" placeholder="Enter your task..." required>
+            <button type="submit">Start Focus Session</button>
+        </form>
+    </dialog>
     <script src="script.js"></script>
 </body>
 </html> 
